@@ -35,6 +35,7 @@ namespace StatlerWaldorfCorp.LocationReporter.Service.Events
             {
                 using(var channel = connection.CreateModel())
                 {
+
                     channel.QueueDeclare(
                         queue: QUEUE_LOCATONRECORDED,
                         durable: false,
@@ -44,6 +45,7 @@ namespace StatlerWaldorfCorp.LocationReporter.Service.Events
                     );
                     var jsonPayload = locationRecordedEvent.ToJson();
                     var body = Encoding.UTF8.GetBytes(jsonPayload);
+
                     channel.BasicPublish(
                         exchange: "",
                         routingKey: QUEUE_LOCATONRECORDED,

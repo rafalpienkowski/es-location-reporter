@@ -27,6 +27,7 @@ namespace StatlerWaldorfCorp.LocationReporter.Service.Service
 
         public async Task<Guid> GetTeamForMemberAsync(Guid memberId)
         {
+            return Guid.NewGuid();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
