@@ -19,7 +19,7 @@ namespace StatlerWaldorfCorp.LocationReporter.Service.Service
             _logger = logger;
             
             var url = serviceOptions.Value.Url;
-            logger.LogError($"Team Service HTTP client using URI {url}");
+            logger.LogInformation($"Team Service HTTP client using URI {url}");
 
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(url);
