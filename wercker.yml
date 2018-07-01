@@ -4,50 +4,28 @@ build:
   steps:    
     - script:
         name: restore
-        cwd: src/StatlerWaldorfCorp.LocationService
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           dotnet restore
     - script:
         name: build
-        cwd: src/StatlerWaldorfCorp.LocationService
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           dotnet build
     - script:
         name: publish
-        cwd: src/StatlerWaldorfCorp.LocationService
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           dotnet publish -c Release -o publish	 
     - script:
         name: chmod
-        cwd: src/StatlerWaldorfCorp.LocationService
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           chmod +x ./docker_entrypoint.sh
-test:
-  steps:
-    - script:
-        name: test-restore
-        cwd: test/StatlerWaldorfCorp.LocationService.Tests
-        code: |
-          dotnet restore
-    - script:
-        name: test-build
-        cwd: test/StatlerWaldorfCorp.LocationService.Tests
-        code: |
-          dotnet build
-    - script:
-        name: test-run
-        cwd: test/StatlerWaldorfCorp.LocationService.Tests
-        code: |
-          dotnet test
-    - script:
-        name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationService
-        code: |
-          cp -r . $WERCKER_OUTPUT_DIR/app 
 deploy:
   steps:
     - internal/docker-push:
-        repository: rafalpienkowski/statler-waldorf-corp-location-service
+        repository: rafalpienkowski/statler-waldorf-corp-location-reporter
         tag: latest, 2.0
         username: $USERNAME
         password: $PASSWORD
