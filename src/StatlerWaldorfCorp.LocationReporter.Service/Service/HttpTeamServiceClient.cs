@@ -27,23 +27,22 @@ namespace StatlerWaldorfCorp.LocationReporter.Service.Service
 
         public async Task<Guid> GetTeamForMemberAsync(Guid memberId)
         {
-            return Guid.NewGuid();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var response = await _httpClient.GetAsync($"/members/{memberId}/team");
+            var response = await _httpClient.GetAsync($"/api/members/{memberId}/team");
             if(!response.IsSuccessStatusCode)
             {
                 return Guid.Empty;
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var teamIdResponse = JsonConvert.DeserializeObject<TeamIDResponse>(json);
+            var teamIdResponse = JsonConvert.DeserializeObject<TeamIdResponse>(json);
             return teamIdResponse.TeamId;
         }
     }
 
-    public class TeamIDResponse
+    public class TeamIdResponse
     {
         public Guid TeamId { get; set; }
     }
