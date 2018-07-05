@@ -11,12 +11,7 @@ build:
         name: build
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          dotnet build
-    - script:
-        name: publish
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
-        code: |
-          dotnet publish -c Release -o publish	 
+          dotnet build	 
     - script:
         name: chmod
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
@@ -26,9 +21,9 @@ packaging:
   steps:
     - script:
         name: publish
-        cwd: src/StatlerWaldorfCorp.LocationReporter
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          dotnet publish -o publish
+          dotnet publish -c Release -o publish
     - script:
         name: copy binary
         cwd: src/StatlerWaldorfCorp.LocationReporter
