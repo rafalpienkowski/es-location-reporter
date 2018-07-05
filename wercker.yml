@@ -26,8 +26,9 @@ packaging:
           chmod +x ./docker_entrypoint.sh
     - script:
         name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service/app/publish
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service/
         code: |
+          ls -la $WERCKER_OUTPUT_DIR/app
           cp -r . $WERCKER_OUTPUT_DIR/app   
     - script:
         name: copy entrypoint
