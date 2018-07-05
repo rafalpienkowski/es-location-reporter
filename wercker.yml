@@ -50,5 +50,5 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         registry: https://registry.hub.docker.com/v2
-        entrypoint: "/pipeline/source/app/docker_entrypoint.sh"
+        entrypoint: "/app/docker_entrypoint.sh"
         env: "ASPNETCORE_URLS=http://+:5000"
