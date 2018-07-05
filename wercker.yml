@@ -23,6 +23,7 @@ build:
         code: |
           chmod +x ./docker_entrypoint.sh
 packaging:
+  steps:
     - script:
         name: copy binary
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
