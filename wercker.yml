@@ -26,16 +26,17 @@ packaging:
           dotnet publish -c Release -o publish
     - script:
         name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationReporter
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           cp -r . $WERCKER_OUTPUT_DIR/app   
     - script:
         name: copy entrypoint
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app   
     - script:
         name: copy config
-        cwd: src/StatlerWaldorfCorp.LocationReporter
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           cp appsettings.json $WERCKER_OUTPUT_DIR/app/publish
 deploy:
