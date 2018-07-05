@@ -25,10 +25,24 @@ build:
 packaging:
   steps:
     - script:
-        name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
+        name: publish
+        cwd: src/StatlerWaldorfCorp.LocationReporter
         code: |
-          cp -r . $WERCKER_OUTPUT_DIR/app 
+          dotnet publish -o publish
+    - script:
+        name: copy binary
+        cwd: src/StatlerWaldorfCorp.LocationReporter
+        code: |
+          cp -r . $WERCKER_OUTPUT_DIR/app   
+    - script:
+        name: copy entrypoint
+        code: |
+          cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app   
+    - script:
+        name: copy config
+        cwd: src/StatlerWaldorfCorp.LocationReporter
+        code: |
+          cp appsettings.json $WERCKER_OUTPUT_DIR/app/publish
 deploy:
   box: microsoft/aspnetcore:2.0
   steps:
