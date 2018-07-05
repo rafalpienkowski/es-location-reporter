@@ -20,15 +20,15 @@ packaging:
         code: |
           dotnet publish -c Release -o publish
     - script:
-        name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
-        code: |
-          cp -r . $WERCKER_OUTPUT_DIR/app   
-    - script:
         name: chmod
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           chmod +x ./docker_entrypoint.sh
+    - script:
+        name: copy binary
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service/app/publish
+        code: |
+          cp -r . $WERCKER_OUTPUT_DIR/app   
     - script:
         name: copy entrypoint
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
