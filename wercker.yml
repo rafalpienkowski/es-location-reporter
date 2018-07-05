@@ -22,6 +22,7 @@ build:
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           chmod +x ./docker_entrypoint.sh
+packaging:
     - script:
         name: copy binary
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
@@ -37,5 +38,4 @@ deploy:
         password: $PASSWORD
         registry: https://registry.hub.docker.com/v2
         entrypoint: "/pipeline/source/app/docker_entrypoint.sh"
-        ports: "80"
         env: "ASPNETCORE_URLS=http://+:5000"
