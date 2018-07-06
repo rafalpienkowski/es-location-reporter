@@ -20,28 +20,15 @@ packaging:
         code: |
           dotnet publish -c Release -o publish
     - script:
-        name: chmod
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
-        code: |
-          chmod +x ./docker_entrypoint.sh
-    - script:
         name: copy binary
-        cwd: src/StatlerWaldorfCorp.LocationReporter.Service/
-        code: |
-          ls -la $WERCKER_OUTPUT_DIR/app
-          cp -r . $WERCKER_OUTPUT_DIR/app   
-    - script:
-        name: copy entrypoint
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app   
-          ls -la $WERCKER_OUTPUT_DIR/app
+          cp -r . $WERCKER_OUTPUT_DIR/app
     - script:
         name: copy config
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           cp appsettings.json $WERCKER_OUTPUT_DIR/app/publish
-          ls -la $WERCKER_OUTPUT_DIR/app/publish
 deploy:
   box: microsoft/aspnetcore:2.0
   steps:
@@ -51,5 +38,5 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         registry: https://registry.hub.docker.com/v2
-        entrypoint: "/app/docker_entrypoint.sh"
+        entrypoint: "/pipeline/output/app/docker_entrypoint.sh"
         env: "ASPNETCORE_URLS=http://+:5000"
