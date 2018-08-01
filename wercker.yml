@@ -33,7 +33,7 @@ packaging:
         name: copy config
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          cp appsettings.json $WERCKER_OUTPUT_DIR/app/publish
+          cp appsettings*json $WERCKER_OUTPUT_DIR/app/publish
     - script:
         name: copy entrypoint
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
