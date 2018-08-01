@@ -38,7 +38,7 @@ packaging:
         name: copy entrypoint
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app  
+          cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app 
 deploy:
   box: microsoft/aspnetcore:2.0
   steps:
@@ -48,5 +48,5 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         registry: https://registry.hub.docker.com/v2
-        entrypoint: "/pipeline/output/app/docker_entrypoint.sh"
+        entrypoint: "/pipeline/source/app/docker_entrypoint.sh" 
         env: "ASPNETCORE_URLS=http://+:5000"
