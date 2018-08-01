@@ -11,7 +11,12 @@ build:
         name: build
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
-          dotnet build	 
+          dotnet build
+    - script:
+        name: chmod
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
+        code: |
+          chmod +x ./docker_entrypoint.sh	 
 packaging:
   steps:
     - script:
@@ -29,6 +34,11 @@ packaging:
         cwd: src/StatlerWaldorfCorp.LocationReporter.Service
         code: |
           cp appsettings.json $WERCKER_OUTPUT_DIR/app/publish
+    - script:
+        name: copy entrypoint
+        cwd: src/StatlerWaldorfCorp.LocationReporter.Service
+        code: |
+          cp docker_entrypoint.sh $WERCKER_OUTPUT_DIR/app  
 deploy:
   box: microsoft/aspnetcore:2.0
   steps:
